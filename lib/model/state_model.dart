@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final country = countryFromJson(jsonString);
+//     final allState = allStateFromJson(jsonString);
 
 import 'dart:convert';
 
-List<Country> countryFromJson(String str) => List<Country>.from(json.decode(str).map((x) => Country.fromJson(x)));
+List<AllState> allStateFromJson(String str) => List<AllState>.from(json.decode(str).map((x) => AllState.fromJson(x)));
 
-String countryToJson(List<Country> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String allStateToJson(List<AllState> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Country {
-  Country({
+class AllState {
+  AllState({
     this.id,
     this.country,
     this.countryCode,
@@ -26,7 +26,7 @@ class Country {
   });
 
   String? id;
-  CountryEnum? country;
+  Country? country;
   CountryCode? countryCode;
   Province? province;
   String? city;
@@ -39,85 +39,52 @@ class Country {
   int? active;
   DateTime? date;
 
-  factory Country.fromJson(Map<String, dynamic> json) => Country(
-        id: json["ID"],
-        country: countryEnumValues.map[json["Country"]]!,
-        countryCode: countryCodeValues.map[json["CountryCode"]]!,
-        province: provinceValues.map[json["Province"]]!,
-        city: json["City"],
-        cityCode: json["CityCode"],
-        lat: json["Lat"],
-        lon: json["Lon"],
-        confirmed: json["Confirmed"],
-        deaths: json["Deaths"],
-        recovered: json["Recovered"],
-        active: json["Active"],
-        date: json["Date"] == null ? null : DateTime.parse(json["Date"]),
-      );
+  factory AllState.fromJson(Map<String, dynamic> json) => AllState(
+    id: json["ID"],
+    country: countryValues.map[json["Country"]]!,
+    countryCode: countryCodeValues.map[json["CountryCode"]]!,
+    province: provinceValues.map[json["Province"]]!,
+    city: json["City"],
+    cityCode: json["CityCode"],
+    lat: json["Lat"],
+    lon: json["Lon"],
+    confirmed: json["Confirmed"],
+    deaths: json["Deaths"],
+    recovered: json["Recovered"],
+    active: json["Active"],
+    date: json["Date"] == null ? null : DateTime.parse(json["Date"]),
+  );
 
   Map<String, dynamic> toJson() => {
-        "ID": id,
-        "Country": countryEnumValues.reverse[country],
-        "CountryCode": countryCodeValues.reverse[countryCode],
-        "Province": provinceValues.reverse[province],
-        "City": city,
-        "CityCode": cityCode,
-        "Lat": lat,
-        "Lon": lon,
-        "Confirmed": confirmed,
-        "Deaths": deaths,
-        "Recovered": recovered,
-        "Active": active,
-        "Date": date?.toIso8601String(),
-      };
+    "ID": id,
+    "Country": countryValues.reverse[country],
+    "CountryCode": countryCodeValues.reverse[countryCode],
+    "Province": provinceValues.reverse[province],
+    "City": city,
+    "CityCode": cityCode,
+    "Lat": lat,
+    "Lon": lon,
+    "Confirmed": confirmed,
+    "Deaths": deaths,
+    "Recovered": recovered,
+    "Active": active,
+    "Date": date?.toIso8601String(),
+  };
 }
 
-enum CountryEnum { INDIA }
+enum Country { INDIA }
 
-final countryEnumValues = EnumValues({"India": CountryEnum.INDIA});
+final countryValues = EnumValues({
+  "India": Country.INDIA
+});
 
 enum CountryCode { IN }
 
-final countryCodeValues = EnumValues({"IN": CountryCode.IN});
+final countryCodeValues = EnumValues({
+  "IN": CountryCode.IN
+});
 
-enum Province {
-  SIKKIM,
-  WEST_BENGAL,
-  MEGHALAYA,
-  JHARKHAND,
-  TRIPURA,
-  ANDHRA_PRADESH,
-  MANIPUR,
-  ASSAM,
-  HIMACHAL_PRADESH,
-  TAMIL_NADU,
-  TELANGANA,
-  HARYANA,
-  BIHAR,
-  MAHARASHTRA,
-  CHHATTISGARH,
-  NAGALAND,
-  DELHI,
-  CHANDIGARH,
-  LAKSHADWEEP,
-  PUNJAB,
-  UTTAR_PRADESH,
-  PUDUCHERRY,
-  KARNATAKA,
-  ARUNACHAL_PRADESH,
-  ANDAMAN_AND_NICOBAR_ISLANDS,
-  MIZORAM,
-  MADHYA_PRADESH,
-  RAJASTHAN,
-  GOA,
-  JAMMU_AND_KASHMIR,
-  LADAKH,
-  ODISHA,
-  DADRA_AND_NAGAR_HAVELI_AND_DAMAN_AND_DIU,
-  UTTARAKHAND,
-  KERALA,
-  GUJARAT
-}
+enum Province { SIKKIM, WEST_BENGAL, MEGHALAYA, JHARKHAND, TRIPURA, ANDHRA_PRADESH, MANIPUR, ASSAM, HIMACHAL_PRADESH, TAMIL_NADU, TELANGANA, HARYANA, BIHAR, MAHARASHTRA, CHHATTISGARH, NAGALAND, DELHI, CHANDIGARH, LAKSHADWEEP, PUNJAB, UTTAR_PRADESH, PUDUCHERRY, KARNATAKA, ARUNACHAL_PRADESH, ANDAMAN_AND_NICOBAR_ISLANDS, MIZORAM, MADHYA_PRADESH, RAJASTHAN, GOA, JAMMU_AND_KASHMIR, LADAKH, ODISHA, DADRA_AND_NAGAR_HAVELI_AND_DAMAN_AND_DIU, UTTARAKHAND, KERALA, GUJARAT }
 
 final provinceValues = EnumValues({
   "Andaman and Nicobar Islands": Province.ANDAMAN_AND_NICOBAR_ISLANDS,
